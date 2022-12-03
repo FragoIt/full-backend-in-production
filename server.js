@@ -23,6 +23,11 @@ app.get(`/api/config/paypal`, (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
 
+app.use(function (request, response, next) {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 // ERROR HANDLER
 app.use(notFound);
 app.use(errorHandler);
