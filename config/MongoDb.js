@@ -5,6 +5,11 @@ const connectDatabase = async () => {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
+      options: {
+        authenticationDatabase: env('AUTHENTICATION_DATABASE', null),
+        ssl: env.bool('DATABASE_SSL', true),
+      }
+      
     });
 
     console.log(`MongoDB Connected`);
@@ -15,3 +20,5 @@ const connectDatabase = async () => {
 };
 
 export default connectDatabase;
+
+
